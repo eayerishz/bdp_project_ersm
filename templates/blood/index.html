@@ -1,0 +1,60 @@
+{% load static %}
+<!DOCTYPE html>
+
+<head>
+    <style>
+        body {
+            background-color: #f3f5f9; /* Light pastel background */
+            font-family: 'Josefin Sans', sans-serif; /* Use a nice font */
+        }
+
+        .xyz {
+            margin-bottom: 0px;
+            background-image: url('{% static "image/homepage.jpg" %}');
+            background-size: cover;
+            background-repeat: no-repeat;
+            height: 400px; /* Set a height for the jumbotron */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white; /* Text color for contrast */
+        }
+
+        .jumbotron {
+            margin-top: 0px;
+            margin-bottom: 0px;
+            background-color: #ff9f9f; /* Light pastel red */
+            color: #343a40; /* Dark text for readability */
+            padding: 20px; /* Add some padding */
+        }
+
+        .lead {
+            font-size: 1.5rem; /* Adjust font size */
+        }
+
+        p {
+            margin: 10px 0; /* Add margin for spacing */
+        }
+    </style>
+</head>
+
+<body>
+    {% include "blood/navbar.html" %}
+    <br>
+    <section id="section-jumbotron" style="margin-bottom: 0px;" class="jumbotron-fluid xyz">
+        <div class="container text-center">
+            <br><br><br><br>
+            <h1>Welcome to the Blood Bank</h1> <!-- Optional welcome message -->
+            <br><br><br><br>
+        </div>  
+    </section>
+
+    <div class="jumbotron">
+        <p class="lead text-center">“Opportunities knock the door sometimes, so don’t let it go and donate blood.”</p>
+        <p class="text-center">- LazyCoder</p>
+    </div>
+    
+    {% include "blood/footer.html" %}
+</body>
+
+</html>

@@ -1,0 +1,80 @@
+{% extends 'blood/adminbase.html' %}
+{% block content %}
+{% load widget_tweaks %}
+{% load static %}
+<head>
+    <style>
+        .label {
+            color: white;
+            padding: 8px;
+        }
+        
+        .success {
+            background-color: #B2FFB2; /* Light pastel green */
+        }
+        .info {
+            background-color: #A0D6E0; /* Light pastel blue */
+        }
+        .warning {
+            background-color: #FFDAA5; /* Light pastel orange */
+        }
+        .danger {
+            background-color: #FFB3B3; /* Light pastel red */
+        }
+        .other {
+            background-color: #F0E3E3; /* Light pastel gray */
+            color: black;
+        }
+
+        .table thead {
+            background-color: #E1BEE7; /* Light pastel purple */
+        }
+    </style>
+</head>
+<br><br>
+<div class="container">
+    <h4 class="text-center">BLOOD DONATION DETAILS</h4><br>
+    <table class="table table-light table-hover table-bordered table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Donor Name</th>
+                <th scope="col">Disease</th>
+                <th scope="col">Age</th>
+                <th scope="col">Blood Group</th>
+                <th scope="col">Unit</th>
+                <th scope="col">Request Date</th>
+                <th scope="col">Status</th>
+                <th class="text-right">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for t in donations %}
+            <tr>
+                <td>{{ t.donor }}</td>
+                <td>{{ t.disease }}</td>
+                <td>{{ t.age }}</td>
+                <td>{{ t.bloodgroup }}</td>
+                <td>{{ t.unit }}</td>
+                <td>{{ t.date }}</td>
+                <td>{{ t.status }}</td>
+                {% if t.status == 'Pending' %}
+                <td class="text-right">
+                    <button class="btn btn-primary badge-pill" style="width: 100px;">
+                        <a style="text-decoration: none; color: white;" href="{% url 'approve-donation' t.id %}">APPROVE</a>
+                    </button>
+                    <button class="btn btn-danger badge-pill" style="width: 80px;">
+                        <a style="text-decoration: none; color: white;" href="{% url 'reject-donation' t.id %}">REJECT</a>
+                    </button>
+                </td>
+                {% elif t.status == 'Approved' %}
+                <td><span class="label success">{{ t.unit }} Unit Added To Stock</span></td>
+                {% else %}
+                <td><span class="label danger">0 Unit Added To Stock</span></td> 
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+    
+{% endblock content %}

@@ -1,0 +1,86 @@
+{% extends 'donor/donorbase.html' %}
+{% block content %}
+{% load widget_tweaks %}
+{% load static %}
+<head>
+    <style>
+        body {
+            background-color: #f3f5f9; /* Light pastel background */
+            font-family: 'Josefin Sans', sans-serif; /* Use a nice font */
+        }
+
+        .label {
+            color: white;
+            padding: 8px;
+        }
+
+        .success {
+            background-color: #ff9f9f; /* Light pastel red */
+        }
+
+        .info {
+            background-color: #90caf9; /* Light pastel blue */
+        }
+
+        .warning {
+            background-color: #ffcc80; /* Light pastel orange */
+        }
+
+        .danger {
+            background-color: #f44336; /* Red */
+        }
+
+        .other {
+            background-color: #e7e7e7; /* Gray */
+            color: black;
+        }
+
+        .table {
+            margin-top: 20px;
+        }
+
+        .table thead {
+            background-color: #ffb3b3; /* Light pastel pink for the header */
+        }
+
+        h4 {
+            color: #343a40; /* Darker color for the heading */
+        }
+    </style>
+</head>
+<br><br>
+<div class="container">
+    <h4 class="text-center">My Donation History</h4><br>
+    <table class="table table-light table-hover table-bordered table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Donor Age</th>
+                <th scope="col">Disease (if any)</th>
+                <th scope="col">Blood Group</th>
+                <th scope="col">Unit</th>
+                <th scope="col">Date</th>
+                <th scope="col">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for t in donations %}
+            <tr>
+                <td>{{ t.age }}</td>
+                <td>{{ t.disease }}</td>
+                <td>{{ t.bloodgroup }}</td>
+                <td>{{ t.unit }}</td>
+                <td>{{ t.date }}</td>
+                {% if t.status == 'Approved' %}
+                <td><span class="label warning">Approved</span></td>
+                {% elif t.status == 'Rejected' %}
+                <td><span class="label success">Rejected</span></td>
+                {% else %}
+                <td><span class="label info">Pending</span></td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock content %}
